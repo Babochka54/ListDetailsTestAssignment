@@ -1,0 +1,125 @@
+﻿@page "{id}"
+@model ListDetailsTest.Pages.DetailsModel
+@using ListDetailsTest.Model;
+@using ListDetailsTest;
+
+<head>
+    <title>@Model.company!.name details</title>
+</head>
+<body>
+    
+    <p><span style="margin-right:30px; font-size:18px"><b>Company details</b></span> <span style="color:#808080; font-size: 14px;">@Model.company!.name</span></p>
+    <div class="details-groups">
+
+    <div class="group">
+        <div class="header">
+            <h3>Info</h3>
+                <div><a href="#"> <img src="~/img/Accept.svg" /> </a></div><!--The test task does not specify the need for implementation-->
+        </div>
+        <div >
+            @(Html.CreateInputsFromEntity<Company>(Model.company,"employees", "notes", "orders", "phone"))
+
+        </div>
+    </div>
+
+    <div class="group">
+        <div class="header">
+            <h3>History</h3>
+            <div>
+                    <a href="/Details/@Model.company!.id">
+                        <img src="~/img/Refresh.svg" />
+                </a>
+            </div>
+        </div>
+            @(Html.CreateTableFromEntities<Order>(Model.company!.orders, "companyId", "company"))
+    </div>
+
+    <div class="group">
+        <div class="header">
+            <h3>Notes</h3>
+                <div>
+                    <a href="#">
+                        <img src="~/img/Edit.svg" /><!--The test task does not specify the need for implementation-->
+                    </a>
+                </div>
+        </div >
+            @(Html.CreateTableFromEntities<Note>(Model.company!.notes, "companyId", "company"))
+
+    </div>
+
+    <div class="group-wide">
+        <div class="content">
+            <div class="header">
+               <h3>Employees</h3>
+               <div>
+                    <a href="#">
+                            <img src="~/img/Plus.svg" /> <!--The test task does not specify the need for implementation-->
+                    </a>
+                    <a href="#">
+                            <img src="~/img/Edit.svg" /><!--The test task does not specify the need for implementation-->
+                    </a>
+                    <a href="/Details/@Model.company!.id">
+                            <img src="~/img/Refresh.svg" /> 
+                    </a>
+                    </div>
+                </div>
+            <div class="header">
+            <h3></h3>
+                <div>
+                    <a href="#">
+                            <img src="~/img/Edit.svg" /> <!--The test task does not specify the need for implementation-->
+                    </a>
+                    <a href="#">
+                            <img src="~/img/Delete.svg" /> <!--The test task does not specify the need for implementation-->
+                    </a>
+                </div>
+        </div>
+            <table>
+                <thead>
+                    <tr><th>First Name</th><th>Second Name</th></tr>
+                </thead>
+                <tbody>
+                        @foreach (Employee e in Model.company!.employees)
+                        {
+                            <tr><td><a class="employee-table-item" data-id="@e.id" href="#">@e.firstName</a></td><td>@e.secondName</td></tr>
+                        }
+                    </tbody>
+            </table>
+            <div class="employee-inputs">
+                    @foreach(Employee e in Model.company!.employees)
+                    {  
+                        @(Html.CreateInputsFromEntity<Employee>(e, "id","companyId", "company"))
+                    }
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+    <script>
+        var selectedIndex = @(Model.company!.employees[0].id);
+
+        function ShowInputs(id){
+            HideAllInputs();
+
+            const inputs = document.querySelectorAll(`div[data-id='${id}']`);
+            inputs.forEach(i => i.style.display = "grid");
+        }
+
+        function HideAllInputs(){
+            const inputsGroup = document.querySelectorAll(".employee-inputs .inputs-container");
+            inputsGroup.forEach(i => i.style.display = "none");
+        }
+
+            ShowInputs(selectedIndex);
+
+        const items = document.getElementsByClassName("employee-table-item");
+
+        for(let i = 0; i < items.length; i++){
+            items[i].addEventListener("click", function(e){
+                ShowInputs(e.target.getAttribute("data-id"));
+            });
+        }
+
+    </script>
+</body>

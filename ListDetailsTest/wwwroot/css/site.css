@@ -1,0 +1,101 @@
+﻿body{
+    display:flex;
+    justify-content:center;
+    font-family:Calibri;
+}
+
+a, a:hover, a:visited{
+    text-decoration:none;
+    color:black;
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
+
+th {
+    color: grey;
+    border: 1px solid #ccc;
+}
+
+td {
+    border-right: 1px solid #ccc;
+}
+
+td,th,tr{
+    padding: 7px;
+    font-size:14px;
+}
+
+.details-groups{
+    display: inline-flex;
+    flex-wrap:wrap;
+    max-width:800px;
+}
+
+.group {
+    padding: 5px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    margin: 5px;
+    width: 246px;
+}
+
+.group-wide {
+    padding: 5px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    margin: 5px;
+    width: 512px;
+}
+
+.inputs-container {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-row-gap: 0.5em;
+    height: 100%;
+    font-size: 14px;
+}
+
+.content {
+    display: inline-grid;
+    width: 100%;
+    grid-template-columns: 48% 48%;
+    grid-column-gap: 4%;
+}
+
+.group table{
+    width: 100%;
+}
+
+th,tr{
+    height:16px;
+}
+
+.content > table {
+    align-self:start;
+}
+img{
+    width:20px;
+    height:20px;
+}
+
+.header{
+    display:inline-grid;
+    grid-template-columns:50% 50%;
+    width:100%;
+    align-content:center;
+    height:40px;
+}
+
+.header > div{
+    display:grid;
+    align-content:center;
+    justify-content:end;
+    grid-auto-flow:column;
+}
+
+.header a{
+    margin: 5px;
+}

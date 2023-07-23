@@ -1,0 +1,22 @@
+﻿@page
+@model ListDetailsTest.Pages.IndexModel
+@using ListDetailsTest.Model;
+
+<head>
+    <title>Companies list</title>
+</head>
+<body>
+    <table id="cTable">
+        <thead>
+            <tr>
+                <th>Company Name</th><th>City</th><th>State</th><th>Phone</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            @foreach(Company c in Model.companies)
+            {
+                <tr><td><a href="/Details/@c.id">@c.name</a></td><td>@c.city</td><td>@c.state</td><td>@c.phone</td></tr>
+            }
+        </tbody>
+    </table>
+</body>
